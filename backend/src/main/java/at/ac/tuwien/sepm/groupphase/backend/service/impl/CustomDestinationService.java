@@ -4,6 +4,7 @@ import at.ac.tuwien.sepm.groupphase.backend.entity.Destination;
 import at.ac.tuwien.sepm.groupphase.backend.exception.NotFoundException;
 import at.ac.tuwien.sepm.groupphase.backend.repository.DestinationRepository;
 import at.ac.tuwien.sepm.groupphase.backend.service.DestinationService;
+import at.ac.tuwien.sepm.groupphase.backend.util.DestinationValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -16,9 +17,11 @@ public class CustomDestinationService implements DestinationService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     private final DestinationRepository destinationRepository;
+    private final DestinationValidator destinationValidator;
 
-    public CustomDestinationService(DestinationRepository destinationRepository) {
+    public CustomDestinationService(DestinationRepository destinationRepository, DestinationValidator destinationValidator) {
         this.destinationRepository = destinationRepository;
+        this.destinationValidator = destinationValidator;
     }
 
     @Override
@@ -35,6 +38,7 @@ public class CustomDestinationService implements DestinationService {
     @Override
     public Destination publishDestination(Destination destination) {
         LOGGER.debug("Publish new message {}", destination);
+        destinationValidator.validateDestination(destination);
         return destinationRepository.save(destination);
     }
 }

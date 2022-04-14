@@ -30,4 +30,10 @@ public interface TestData {
         }
     };
 
+    /**
+     * URI Data
+     */
+    String BASE_URL = "http://localhost:8080";
+    String DESTINATION_URL = "/api/v1/destinations";
+
 }
