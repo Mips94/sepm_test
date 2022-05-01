@@ -1,0 +1,15 @@
+<div>
+  <ul>
+    <li *ngFor="let single_location of locations" class="column-4">
+      <div class="location-card">
+        <div class="location-card-img">
+          <img [src]=single_location.image height="100px" *ngIf="single_location.image">
+          <img [src]=defaultImageLocation height="100px" *ngIf="!single_location.image">
+        </div>
+        <div class="location-card-name">
+          <strong>{{single_location.name}}</strong><br/>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
